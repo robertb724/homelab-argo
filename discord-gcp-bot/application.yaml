@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gcp-discord-bot
+spec:
+  project: default
+  source:
+    chart: gcp-discord-bot
+    repoURL: us-west1-docker.pkg.dev/robertb724-personal/apps/charts  
+    targetRevision: 0.0.1
+  destination:
+    name: "in-cluster"
+    namespace: palworld-bot
