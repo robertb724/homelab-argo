@@ -11,3 +11,7 @@ spec:
   destination:
     name: "in-cluster"
     namespace: palworld-bot
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
