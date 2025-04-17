@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/robertb724/homelab-argo
     targetRevision: main
-    path: apps/promtail
+    path: infra/promtail
     helm:
       chart: promtail
       repoURL: https://grafana.github.io/helm-charts

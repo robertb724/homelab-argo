@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/robertb724/homelab-argo
     targetRevision: main
-    path: apps/nginx
+    path: infra/nginx
     helm:
       chart: ingress-nginx
       repoURL: https://kubernetes.github.io/ingress-nginx

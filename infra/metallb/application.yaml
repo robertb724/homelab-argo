@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/robertb724/homelab-argo
     targetRevision: main
-    path: apps/metallb
+    path: infra/metallb
     helm:
       chart: metallb
       repoURL: https://metallb.github.io/metallb

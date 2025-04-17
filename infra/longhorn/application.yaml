@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/robertb724/homelab-argo
     targetRevision: main
-    path: apps/longhorn
+    path: infra/longhorn
     helm:
       chart: longhorn
       repoURL: https://charts.longhorn.io
