@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argo
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    path: apps/loki
+    helm:
+      chart: loki
+      repoURL: https://grafana.github.io/helm-charts
+      targetRevision: 5.41.8
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: loki
+  syncPolicy:
+    automated:
+      selfHeal: false
+      prune: false
