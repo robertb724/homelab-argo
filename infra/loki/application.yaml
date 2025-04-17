@@ -6,13 +6,10 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/robertb724/homelab-argo
-    targetRevision: main
-    path: infra/loki
+    chart: loki
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 5.41.8
     helm:
-      chart: loki
-      repoURL: https://grafana.github.io/helm-charts
-      targetRevision: 5.41.8
       valueFiles:
         - values.yaml
   destination:
