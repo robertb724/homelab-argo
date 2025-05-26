@@ -3,15 +3,16 @@ kind: Application
 metadata:
   name: external-dns
   namespace: argo
-  annotations:
-    argocd.argoproj.io/sync-wave: "10"
 spec:
   project: default
   source:
-    repoURL: https://kubernetes-sigs.github.io/external-dns/
-    targetRevision: 1.14.3
-    chart: external-dns
+    repoURL: https://github.com/your-org/your-repo.git
+    targetRevision: HEAD
+    path: infra/external-dns
     helm:
+      chart: external-dns
+      repoURL: https://kubernetes-sigs.github.io/external-dns/
+      targetRevision: 1.14.3
       valueFiles:
         - values.yaml
   destination:
