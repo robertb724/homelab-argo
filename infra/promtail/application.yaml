@@ -3,16 +3,15 @@ kind: Application
 metadata:
   name: promtail
   namespace: argo
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
 spec:
   project: default
   source:
-    repoURL: https://github.com/robertb724/homelab-argo
-    targetRevision: main
-    path: infra/promtail
+    chart: promtail
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 6.15.5
     helm:
-      chart: promtail
-      repoURL: https://grafana.github.io/helm-charts
-      targetRevision: 6.15.5
       valueFiles:
         - values.yaml
   destination:
@@ -22,3 +21,5 @@ spec:
     automated:
       selfHeal: false
       prune: false
+    syncOptions:
+      - CreateNamespace=true
