@@ -1,6 +1,5 @@
-longhorn:
-  preUpgradeChecker:
-    jobEnabled: false
+preUpgradeChecker:
+  jobEnabled: false
 
 longhornUI:
   # -- Replica count for Longhorn UI.
