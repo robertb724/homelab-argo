@@ -11,12 +11,6 @@ spec:
   - repoURL: https://kubernetes.github.io/ingress-nginx
     chart: ingress-nginx
     targetRevision: 4.9.1
-    helm:
-      valueFiles:
-      - $values/infra/nginx-ingress/values.yaml
-  - repoURL: https://github.com/robertb724/homelab-argo
-    targetRevision: main
-    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress
