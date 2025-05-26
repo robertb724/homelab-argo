@@ -7,10 +7,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
 spec:
   project: default
-  source:
+  sources:
+  - repoURL: https://metallb.github.io/metallb
     chart: metallb
-    repoURL: https://metallb.github.io/metallb
     targetRevision: 0.14.3
+  - repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system

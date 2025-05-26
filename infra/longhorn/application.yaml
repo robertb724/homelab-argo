@@ -7,13 +7,16 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
 spec:
   project: default
-  source:
+  sources:
+  - repoURL: https://charts.longhorn.io
     chart: longhorn
-    repoURL: https://charts.longhorn.io
     targetRevision: 1.7.2
     helm:
       valueFiles:
-        - values.yaml
+      - $values/infra/longhorn/values.yaml
+  - repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: longhorn-system

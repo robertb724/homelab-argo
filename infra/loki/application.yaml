@@ -7,13 +7,16 @@ metadata:
     argocd.argoproj.io/sync-wave: "20"
 spec:
   project: default
-  source:
+  sources:
+  - repoURL: https://grafana.github.io/helm-charts
     chart: loki
-    repoURL: https://grafana.github.io/helm-charts
     targetRevision: 5.41.8
     helm:
       valueFiles:
-        - values.yaml
+      - $values/infra/loki/values.yaml
+  - repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: loki

@@ -3,18 +3,20 @@ kind: Application
 metadata:
   name: external-dns
   namespace: argo
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
 spec:
   project: default
-  source:
-    repoURL: https://github.com/robertb724/homelab-argo.git
-    targetRevision: HEAD
-    path: infra/external-dns
+  sources:
+  - repoURL: https://kubernetes-sigs.github.io/external-dns/
+    chart: external-dns
+    targetRevision: 1.14.3
     helm:
-      chart: external-dns
-      repoURL: https://kubernetes-sigs.github.io/external-dns/
-      targetRevision: 1.14.3
       valueFiles:
-        - values.yaml
+      - $values/infra/external-dns/values.yaml
+  - repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: external-dns

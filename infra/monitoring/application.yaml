@@ -7,14 +7,17 @@ metadata:
     argocd.argoproj.io/sync-wave: "10"
 spec:
   project: default
-  source:
+  sources:
+  - repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 56.8.0
     helm:
       valueFiles:
-        - prometheus.values.yaml
-        - grafana.values.yaml
+      - $values/infra/monitoring/prometheus.values.yaml
+      - $values/infra/monitoring/grafana.values.yaml
+  - repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
