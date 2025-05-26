@@ -3,3 +3,6 @@ kind: L2Advertisement
 metadata:
   name: all
   namespace: metallb-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
