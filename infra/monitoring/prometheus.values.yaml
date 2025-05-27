@@ -1,5 +1,6 @@
 prometheus:
   prometheusSpec:
+    thanos: null
     storageSpec:
       volumeClaimTemplate:
         spec:
