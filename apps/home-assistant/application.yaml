@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: home-assistant
+  namespace: argo
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  project: default
+  sources:
+  - repoURL: http://pajikos.github.io/home-assistant-helm-chart/
+    chart: home-assistant
+    targetRevision: "*"
+    helm:
+      valueFiles:
+      - $values/apps/home-assistant/values.yaml
+  - repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: home-assistant
+  syncPolicy:
+    automated:
+      selfHeal: false
+      prune: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

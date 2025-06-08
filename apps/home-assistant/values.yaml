@@ -1,0 +1,15 @@
+ingress:
+  enabled: true
+  className: "nginx"
+  labels: {}
+  annotations:
+    cert-manager.io/cluster-issuer: "cloudflare-letsencrypt-prod"
+  hosts:
+    - host: home.robertbatson.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+   - secretName: home-assistant-tls
+     hosts:
+       - home.robertbatson.com
