@@ -13,3 +13,10 @@ ingress:
    - secretName: home-assistant-tls
      hosts:
        - home.robertbatson.com
+
+configuration:
+  # Enable or disable the configuration setup for Home Assistant
+  enabled: true
+  trusted_proxies:
+    - 10.0.0.0/8
+    - 192.168.0.0/16
