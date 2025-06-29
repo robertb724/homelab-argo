@@ -23,3 +23,5 @@ configuration:
 
 persistence:
   enabled: true
+
+hostNetwork: true
