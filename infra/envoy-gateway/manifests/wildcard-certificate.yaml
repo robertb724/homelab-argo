@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-robertbatson-com
+  namespace: envoy-gateway-system
+spec:
+  secretName: wildcard-robertbatson-com-tls
+  issuerRef:
+    name: cloudflare-letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+  - "*.robertbatson.com"
