@@ -1,29 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring
+  name: envoy-gateway
   namespace: argo
   annotations:
     argocd.argoproj.io/sync-wave: "10"
 spec:
   project: default
   sources:
-  - repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 72.6.3
+  - repoURL: oci://docker.io/envoyproxy
+    chart: gateway-helm
+    targetRevision: v1.2.1
     helm:
       valueFiles:
-      - $values/infra/monitoring/prometheus.values.yaml
-      - $values/infra/monitoring/grafana.values.yaml
+      - $values/infra/envoy-gateway/values.yaml
   - repoURL: https://github.com/robertb724/homelab-argo
     targetRevision: main
     ref: values
   - repoURL: https://github.com/robertb724/homelab-argo
     targetRevision: main
-    path: infra/monitoring/manifests
+    path: infra/envoy-gateway/manifests
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: envoy-gateway-system
   syncPolicy:
     automated:
       selfHeal: false
