@@ -10,6 +10,22 @@ collectorCommon:
         type: basic
         username: "1922292"
         passwordFrom: 'sys.env("GCLOUD_RW_API_KEY")'
+      secret:
+        create: false
+        name: grafana-cloud-auth
+        namespace: grafana-cloud
+
+telemetryServices:
+  node-exporter:
+    deploy: true
+  kube-state-metrics:
+    deploy: true
+  beyla:
+    deploy: false
+  opencost:
+    deploy: false
+  sdkInjector:
+    deploy: false
 
 collectors:
   alloy-daemon:
@@ -24,6 +40,7 @@ collectors:
       - clustered
       - service-discovery
       - filesystem-log-reader
+      - otel-receiver
     alloy:
       extraEnv:
         - name: GCLOUD_RW_API_KEY
