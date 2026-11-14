@@ -10,10 +10,6 @@ collectorCommon:
         type: basic
         username: "1922292"
         passwordFrom: 'sys.env("GCLOUD_RW_API_KEY")'
-      secret:
-        create: false
-        name: grafana-cloud-auth
-        namespace: grafana-cloud
 
 telemetryServices:
   node-exporter:
