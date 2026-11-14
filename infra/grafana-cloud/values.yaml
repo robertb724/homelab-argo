@@ -1,0 +1,36 @@
+cluster:
+  name: homelab
+
+collectorCommon:
+  alloy:
+    remoteConfig:
+      enabled: true
+      url: https://fleet-management-prod-014.grafana.net
+      auth:
+        type: basic
+        username: "1922292"
+        passwordFrom: 'sys.env("GCLOUD_RW_API_KEY")'
+
+collectors:
+  alloy-daemon:
+    enabled: true
+    presets:
+      - daemonset
+      - large
+      - root
+      - host-storage
+      - host-network
+      - host-cgroup
+      - clustered
+      - service-discovery
+      - filesystem-log-reader
+    alloy:
+      extraEnv:
+        - name: GCLOUD_RW_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: grafana-cloud-auth
+              key: password
+
+selfReporting:
+  enabled: false
