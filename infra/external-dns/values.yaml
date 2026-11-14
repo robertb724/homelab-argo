@@ -1,10 +1,6 @@
 provider:
   name: cloudflare
 
-sources:
-  - gateway-httproute
-  - ingress
-
 domainFilters: [robertbatson.com]
 
 txtOwnerId: homelab-k3s

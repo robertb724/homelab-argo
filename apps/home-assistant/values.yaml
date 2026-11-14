@@ -1,5 +1,18 @@
 ingress:
-  enabled: false
+  enabled: true
+  className: "nginx"
+  labels: {}
+  annotations:
+    cert-manager.io/cluster-issuer: "cloudflare-letsencrypt-prod"
+  hosts:
+    - host: home.robertbatson.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+   - secretName: home-assistant-tls
+     hosts:
+       - home.robertbatson.com
 
 configuration:
   # Enable or disable the configuration setup for Home Assistant
