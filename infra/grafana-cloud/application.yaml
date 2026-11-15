@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-cloud
+  namespace: argo
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  project: default
+  sources:
+  - repoURL: https://grafana.github.io/helm-charts
+    chart: k8s-monitoring
+    targetRevision: 4.6.1
+    helm:
+      valueFiles:
+      - $values/infra/grafana-cloud/values.yaml
+  - repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      selfHeal: false
+      prune: false
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
