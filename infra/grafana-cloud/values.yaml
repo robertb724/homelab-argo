@@ -24,8 +24,10 @@ destinations:
 clusterMetrics:
   enabled: true
 
-podLogs:
+podLogsViaLoki:
   enabled: true
+  destinations:
+    - grafana-cloud-logs
 
 telemetryServices:
   beyla:
