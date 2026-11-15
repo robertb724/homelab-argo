@@ -1,15 +1,31 @@
 cluster:
   name: k3s
 
-collectorCommon:
-  alloy:
-    remoteConfig:
-      enabled: true
-      url: https://fleet-management-prod-014.grafana.net
-      auth:
-        type: basic
-        username: "1922292"
-        passwordFrom: 'sys.env("GCLOUD_RW_API_KEY")'
+destinations:
+  grafana-cloud-metrics:
+    type: prometheus
+    url: https://prometheus-prod-67-prod-us-west-0.grafana.net/api/prom/push
+    auth:
+      type: basic
+    secret:
+      create: false
+      name: grafana-cloud-prom-auth
+      namespace: monitoring
+  grafana-cloud-logs:
+    type: loki
+    url: https://logs-prod-021.grafana.net/loki/api/v1/push
+    auth:
+      type: basic
+    secret:
+      create: false
+      name: grafana-cloud-loki-auth
+      namespace: monitoring
+
+clusterMetrics:
+  enabled: true
+
+podLogs:
+  enabled: true
 
 telemetryServices:
   beyla:
@@ -25,27 +41,17 @@ telemetryServices:
 
 collectors:
   alloy:
-    extraService:
-      enabled: true
-      name: otel-receiver
     presets:
+      - clustered
+      - daemonset
       - large
       - root
       - host-network
       - host-storage
       - host-cgroup
-      - clustered
       - service-discovery
       - filesystem-log-reader
-      - daemonset
       - otel-receiver
-    alloy:
-      extraEnv:
-        - name: GCLOUD_RW_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: grafana-cloud-auth
-              key: password
 
 alloy-operator:
   leaderElection:

@@ -17,6 +17,9 @@ spec:
   - repoURL: https://github.com/robertb724/homelab-argo
     targetRevision: main
     ref: values
+  - repoURL: https://github.com/robertb724/homelab-argo
+    targetRevision: main
+    path: infra/grafana-cloud/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
