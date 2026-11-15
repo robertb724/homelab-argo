@@ -47,5 +47,9 @@ collectors:
               name: grafana-cloud-auth
               key: password
 
+alloy-operator:
+  leaderElection:
+    enabled: false
+
 selfReporting:
   enabled: false
